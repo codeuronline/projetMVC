@@ -1,17 +1,24 @@
 <?
-require_once "VideoManager.class.php";
+require_once "models/VideoManager.class.php";
+
+
+
+
 class VideosController{
 
     private $videoManager;
 
+
+
     public function __contruct() {
+        
         $this->videoManager= new VideoManager;
+        
         $this->videoManager->chargementVideos();
     }
        
     public function afficherVideos(){
-        
-        $videos=$this->videoManager->getVideos();
-        require "views/video.view.php";
+                $videos= $this->videoManager->getVideos();
+                 require "views/video.view.php";
     }
 }
