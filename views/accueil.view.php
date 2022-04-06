@@ -1,11 +1,21 @@
+<?php 
+
+ob_start(); 
+
+?>
+
+
+
+Ici la page d'accueil
+
+
+
 <?php
-ob_start(); ?>
-<center>
-    <p>
-    <h1> le contenu de ma page d'accueil</h1>
-    </p>
-</center>
-<?php
-$titre = "Videothèque MGA";
+
 $content = ob_get_clean();
+
+$titre = "Vidothèque MGA";
+
 require "template.php";
+
+?>
