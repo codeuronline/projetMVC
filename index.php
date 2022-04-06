@@ -2,7 +2,7 @@
 if (empty($_GET['page'])) {
     require "views/accueil.views.php";
 } else {
-    switch ($variable) {
+    switch ($_GET['page']) {
         case 'accueil':
             require "views/accueil.views.php";
             break;
