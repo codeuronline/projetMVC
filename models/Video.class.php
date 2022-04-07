@@ -5,9 +5,10 @@ class Video{
     private $duree;
     private $photo;
     
-    public function __construct($id,$data){
-        extract($data);
+    public function __construct($id,$titre,$duree,$photo){
+    
         $this->id = $id;
+       
         $this->titre = $titre;
         $this->duree = $duree;
         $this->photo= $photo;

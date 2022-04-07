@@ -5,14 +5,14 @@ ob_start();
 ?>
 
 
-<form method="POST" action="<?=URL?>video/av" enctype="multipart/form-data">
+<form method="post" action="<?=URL?>videos/av/" enctype="multipart/form-data">
     <div class=" form-group">
-        <label for="Titre" class="form-control" name="titre">Titre : </label>
-        <input type="text" id="Titre" aria-describedby="Titre du film">
+        <label for="Titre" class="form-control">Titre : </label>
+        <input type="text" id="Titre" aria-describedby="Titre du film" name="titre">
     </div>
     <div class="form-group">
-        <label for="Duree" class="form-control" name="duree">Durée : </label>
-        <input type="text" id="Titre" aria-describedby="Durée du film">
+        <label for="Duree" class="form-control">Durée : </label>
+        <input type="text" id="duree" aria-describedby="Durée du film" name="duree">
     </div>
     <div class="form-group">
         <label for="photo" class="form-control">Photo : </label>
@@ -23,6 +23,6 @@ ob_start();
 </form>
 <?php
 $content = ob_get_clean();
-$titre = "Ajout d'une video MGA";
+$titre = "Ajout d'une video à la VJK";
 require "template.php";
 ?>

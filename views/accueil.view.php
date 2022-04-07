@@ -13,7 +13,7 @@ ob_start();
 <?php
 
 
-$titre = "Vidothèque MGA";
+$titre = "Vidéothèque VJK";
 $content = ob_get_clean();
 require "template.php";
 

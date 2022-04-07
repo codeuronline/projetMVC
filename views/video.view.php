@@ -20,9 +20,10 @@ ob_start();
 
     </tr>
 
-    <?php 
+    <?php if (isset($videos)): ?>
 
-    for($i=0; $i < count(@$videos);$i++) :?>
+
+    <?php for($i=0; $i < count(@$videos);$i++) :?>
 
     <tr>
 
@@ -40,13 +41,12 @@ ob_start();
 
     </tr>
 
-    <?php endfor; ?>
+    <?php endfor; 
+     ?>
 
 </table>
-
-<a href="<?=URL?>video/a" class="btn btn-success d-block">Ajouter</a>
-
-
+<?php endif ?>
+<button><a href="<?=URL?>video/a" class="btn btn-success d-block">Ajouter</a></button>
 
 <?php
 

@@ -22,7 +22,7 @@
                     <a class="nav-link" href="<?= URL ?>accueil">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= URL ?>video">Vidéos</a>
+                    <a class="nav-link" href="<?= URL ?>videos">Vidéos</a>
                 </li>
             </ul>
         </div>

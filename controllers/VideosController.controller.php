@@ -6,6 +6,47 @@ class VideosController{
 
     private $videoManager;
     
+
+
+    public function __contruct() {
+        
+        $this->videoManager= new VideoManager;
+        
+        $this->videoManager->chargementVideos();
+    }
+    
+    public function afficherVideo($id){
+        if(!$this->videoManager){
+            echo 'succes';
+        }
+        
+        $video= $this->videoManager->getVideoById($id);
+         require "views/afficherVideo.view.php";    
+    }
+    
+    public function afficherVideos(){
+                $videos= $this->videoManager->getVideos();
+                 require "views/video.view.php";
+    }
+    
+    public function ajoutVideo(){
+        require "views/ajoutVideo.view.php";
+    }
+    
+    public function ajoutVideoValidation(){
+        
+        $data=$_POST;
+        $file = $_FILES['photo'];
+        $repertoire= "public/images/";
+        $data['photo']=$this->ajoutImage($file,$repertoire);
+        // $nomImageAjoute=$this->ajoutImage($file,$repertoire);
+        var_dump($data);
+             
+        $this->videoManager->ajoutVideoBd($data);
+     
+        header('Location: '.URL.'videos');
+        
+    }
     private function ajoutImage($file,$dir){
         $imageValide=['jpg','jpeg','gif','png'];
         
@@ -35,38 +76,9 @@ class VideosController{
         }else return ($date."_".$file['name']);
     }
     
+    
 
-    public function __contruct() {
-        
-        $this->videoManager= new VideoManager;
-        
-        $this->videoManager->chargementVideos();
-    }
-    
-    public function afficherVideo($id){
-        $video= $this->videoManager->getVideoById($id);
-         require "views/afficher.view.php";    
-    }
-    
-    public function afficherVideos(){
-                $videos= $this->videoManager->getVideos();
-                 require "views/video.view.php";
-    }
-    
-    public function ajoutVideo(){
-        require "views/ajoutVideo.view.php";
-    }
-    
-    public function ajoutVideoValidation(){
-        $data=$_POST;
-        $file = $_FILES['photo'];
-        $repertoire= "public/images/";
-        $data['photo']=$this->ajoutImage($file,$repertoire);
-        var_dump($data);
-        die;
-        $this->videoManager->ajoutVideoBD($data);
-        header('Location: '.URL.'video');
-        
-    }
+
+
     
 }

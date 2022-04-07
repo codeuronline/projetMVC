@@ -4,6 +4,7 @@ require_once "controllers/VideosController.controller.php";
 $videoController= new VideosController;
 
 try {
+    var_dump($_SERVER['REQUEST_METHOD']);
 if (empty($_GET['slug'])) {
     require "views/accueil.view.php";
 } else {
@@ -12,7 +13,7 @@ if (empty($_GET['slug'])) {
         case 'accueil':
             require "views/accueil.view.php";
             break;
-            case 'video':
+            case 'videos':
                 if (empty($url[1])) {
                     $videoController->afficherVideos();
                 } elseif ($url[1] === "s") {
@@ -26,7 +27,8 @@ if (empty($_GET['slug'])) {
                 } elseif ($url[1] === 'd') {
                     echo "Suppression d'une video";
                 } elseif ($url[1] === 'av') {
-                    $videoController->ajoutVideoValidation($_POST);
+                    
+                    $videoController->ajoutVideoValidation();
                     echo "Valider l'enregistrement d'une video";
                 
                 } else {

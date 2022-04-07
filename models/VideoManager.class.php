@@ -6,9 +6,6 @@ class VideoManager  extends Model{
     
     private $videos;
     
-    public function __construct(){
-        
-    }
     
     public function ajoutVideo($video){
     
@@ -19,15 +16,13 @@ class VideoManager  extends Model{
 
     public function getVideos()
     {
-        if (count($this->videos)>0) 
             return $this->videos;
-         else {
-            throw new Exception("pas de video trouvé", 1);
-        }
+    
+
     }
 
     public function chargementVideos(){
-        $req = $this->getBdd()->prepare("SELECT * FROM livres");
+        $req = $this->getBdd()->prepare("SELECT * FROM videos");
         $req->execute();
         $mesVideos = $req->fetchAll();
         $req->closeCursor();
@@ -42,24 +37,23 @@ class VideoManager  extends Model{
         for ($i=0; $i < count($this->videos); $i++) { 
         if ($this->videos[$i]->getId()=== $id){
             return $this->videos[$i];
-        } else { 
-            echo "identifiant inexistant";
-        }
+        } 
         } 
      }
-     public function ajoutVideoBD($data){
-        extract($data); 
-        var_dump($data);
+     public function ajoutVideoBd($data){
+        extract($data);
         $sql ="INSERT INTO videos(titre,duree,photo) VALUES (:titre,:duree,:photo) "; 
         $pdo= $this->getBdd()->prepare($sql);
-        foreach ($data as $key => $value) {
+        /*foreach ($data as $key => $value) {
             $pdo->bindValue(":".$key, $value,PDO::PARAM_STR);    # code...
-        }
-        $pdo->bindValue(":photo", $nomImageAjoute);
+        }*/
+        $pdo->bindValue(":titre", $titre,PDO::PARAM_STR);
+        $pdo->bindValue(":duree", $duree,PDO::PARAM_STR);
+        $pdo->bindValue(":photo", $photo,PDO::PARAM_STR);
         $resultat=$pdo->execute();
         $pdo->closeCursor;
         if ($resultat>0) {
-            $video = new Video($this->getBdd()->lastInsertId(),$data);
+            $video = new Video($this->getBdd()->lastInsertId(),$titre,$duree,$photo);
             $this->ajoutVideo($video);
         }
     }
