@@ -19,7 +19,11 @@ class VideoManager  extends Model{
 
     public function getVideos()
     {
-        return $this->videos;
+        if (count($this->videos)>0) 
+            return $this->videos;
+         else {
+            throw new Exception("pas de video trouvé", 1);
+        }
     }
 
     public function chargementVideos(){

@@ -25,6 +25,9 @@ if (empty($_GET['slug'])) {
                     echo "Modification d'une video";
                 } elseif ($url[1] === 'd') {
                     echo "Suppression d'une video";
+                } elseif ($url[1] === 'av') {
+                    echo "Enregistrer une video";
+                
                 } else {
                     throw new Exception("Error Processing Request", 1);
                 }

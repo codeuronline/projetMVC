@@ -3,12 +3,10 @@ ob_start();
 ?>
 <div class="row">
     <div class="col-6">
-        <img src="<=URL ?public/images/<?=$video->getPhoto();?>" alt="" srcset="">
+        <img src="<?=URL ?>public/images/<?=$video->getPhoto();?>" alt="" srcset="">
     </div>
     <div class="col-6">
-
-        <p>
-            Titre:
+        <p>Titre:
             <?$video->getTitre();?>
         </p>
         <p>
