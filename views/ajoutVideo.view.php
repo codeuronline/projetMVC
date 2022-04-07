@@ -16,7 +16,7 @@ ob_start();
     </div>
     <div class="form-group">
         <label for="photo" class="form-control">Photo : </label>
-        <input type="file" id="Photo" aria-describedby="photo du film">
+        <input type="file" id="Photo" aria-describedby="photo du film" name="photo">
     </div>
     <button type="submit" class="btn btn-primary">Valider</button>
     <button type="cancel" class="btn btn-primary">Annuler</button>

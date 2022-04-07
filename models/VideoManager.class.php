@@ -47,7 +47,23 @@ class VideoManager  extends Model{
         }
         } 
      }
-    
+     public function ajoutVideoBD($data){
+        extract($data); 
+        var_dump($data);
+        $sql ="INSERT INTO videos(titre,duree,photo) VALUES (:titre,:duree,:photo) "; 
+        $pdo= $this->getBdd()->prepare($sql);
+        foreach ($data as $key => $value) {
+            $pdo->bindValue(":".$key, $value,PDO::PARAM_STR);    # code...
+        }
+        $pdo->bindValue(":photo", $nomImageAjoute);
+        $resultat=$pdo->execute();
+        $pdo->closeCursor;
+        if ($resultat>0) {
+            $video = new Video($this->getBdd()->lastInsertId(),$data);
+            $this->ajoutVideo($video);
+        }
+    }
+     
 }
     
 ?>

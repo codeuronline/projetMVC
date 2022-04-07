@@ -17,17 +17,12 @@ self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
 
 }
 
-
-
-protected function getBdd(){
-
-if(self::$pdo === null){
-
-self::setBdd();
-
-}
-
-return self::$pdo;
+    protected function getBdd()
+    {
+        if (self::$pdo === null) {
+            self::setBdd();
+        }
+        return self::$pdo;
 
 }
 

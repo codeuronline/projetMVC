@@ -26,7 +26,8 @@ if (empty($_GET['slug'])) {
                 } elseif ($url[1] === 'd') {
                     echo "Suppression d'une video";
                 } elseif ($url[1] === 'av') {
-                    echo "Enregistrer une video";
+                    $videoController->ajoutVideoValidation($_POST);
+                    echo "Valider l'enregistrement d'une video";
                 
                 } else {
                     throw new Exception("Error Processing Request", 1);
