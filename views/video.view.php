@@ -20,7 +20,6 @@ ob_start();
 
     </tr>
 
-    <?php if (isset($videos)): ?>
 
 
     <?php for($i=0; $i < count(@$videos);$i++) :?>
@@ -43,15 +42,15 @@ ob_start();
 
     <?php endfor; 
      ?>
-
 </table>
-<?php endif ?>
-<button><a href="<?=URL?>video/a" class="btn btn-success d-block">Ajouter</a></button>
+
+
+<a href="<?=URL?>videos/a" class="btn btn-success d-block">Ajouter</a>
 
 <?php
 
 $content = ob_get_clean();
 
-$titre = "Les Videos de la bibliothèque";
+$titre = "Les Videos de la VJK";
 
 require "template.php";

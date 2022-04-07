@@ -19,7 +19,7 @@ ob_start();
         <input type="file" id="Photo" aria-describedby="photo du film" name="photo">
     </div>
     <button type="submit" class="btn btn-primary">Valider</button>
-    <button type="cancel" class="btn btn-primary">Annuler</button>
+    <button type="reset" class="btn btn-primary">Annuler</button>
 </form>
 <?php
 $content = ob_get_clean();
