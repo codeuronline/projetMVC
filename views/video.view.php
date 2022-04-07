@@ -28,9 +28,11 @@ ob_start();
 
         <td class="align-middle"><img src="public/images/<?= $videos[$i]->getImage(); ?>" width="60px;"></td>
 
-        <td class="align-middle"><?= $videos[$i]->getTitre(); ?></td>
+        <td class="align-middle">
+            <a href="<?=URL?>/video/s/<?=$videos[$i]->getId()?>"><?= $videos[$i]->getTitre(); ?></a>
+        </td>
 
-        <td class="align-middle"><?= $videos[$i]->getDuree(); ?></td>
+        <td class=" align-middle"><?= $videos[$i]->getDuree(); ?></td>
 
         <td class="align-middle"><a href="" class="btn btn-warning">Modifier</a></td>
 
@@ -42,7 +44,7 @@ ob_start();
 
 </table>
 
-<a href="" class="btn btn-success d-block">Ajouter</a>
+<a href="<?=URL?>video/a" class="btn btn-success d-block">Ajouter</a>
 
 
 

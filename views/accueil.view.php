@@ -6,9 +6,11 @@ ob_start();
 
 
 
-Ici la page d'accueil
-
-
+<center>
+    <h1>
+        Ici la page d'accueil
+    </h1>
+</center>
 
 <?php
 

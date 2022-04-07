@@ -32,10 +32,17 @@ class VideoManager  extends Model{
             $l = new Video($video['id'],$video['titre'],$video['duree'],$video['photo']);
             $this->ajoutVideo($l);
         }
-
         
     }
-     
+     public function getVideoById($id){
+        for ($i=0; $i < count($this->videos); $i++) { 
+        if ($this->videos[$i]->getId()=== $id){
+            return $this->videos[$i];
+        } else { 
+            echo "identifiant inexistant";
+        }
+        } 
+     }
     
 }
     
