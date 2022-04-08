@@ -1,10 +1,6 @@
 <?php 
-
 ob_start(); 
-
 ?>
-
-
 <form method="post" action="<?=URL?>videos/av/" enctype="multipart/form-data">
     <div class=" form-group">
         <label for="Titre" class="form-control">Titre : </label>

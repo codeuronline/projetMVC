@@ -26,9 +26,9 @@ try {
             } elseif ($url[1] === 'd') {
                 echo "Suppression d'une video";
             } elseif ($url[1] === 'av') {
-                
-                $videoController->ajoutVideoValidation();
                 echo "Valider l'enregistrement d'une video";
+                $videoController->ajoutVideoValidation();
+                
             
             } else {
                 throw new Exception("Error Processing Request", 1);

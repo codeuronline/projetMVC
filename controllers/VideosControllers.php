@@ -5,7 +5,7 @@ require_once "models/VideoManager.class.php";
 class VideosController{
 
     private $videoManager;
-    
+       
     public function __contruct() {
         
         $this->videoManager= new VideoManager;
@@ -15,7 +15,6 @@ class VideosController{
     
 public function afficherVideo($id){
     var_dump($id);
-    var_dump($this->VideoManager);
     $video= $this->videoManager->getVideoById($id);
     require "views/afficherVideo.view.php";    
 }
@@ -30,13 +29,13 @@ public function ajoutVideo(){
 }
 
 public function ajoutVideoValidation(){
-    
     $data=$_POST;
     $file = $_FILES['photo'];
     $repertoire= "public/images/";
     $data['photo']=$this->ajoutImage($file,$repertoire);
     // $nomImageAjoute=$this->ajoutImage($file,$repertoire);
-                    
+    echo "AVV";
+    var_dump($data); 
     $this->videoManager->ajoutVideoBd($data);
     
     header('Location: '.URL.'videos');

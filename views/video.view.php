@@ -1,5 +1,5 @@
 <?php
-require_once "models/Video.class.php";
+//require_once "models/Video.class.php";
 require_once  "models/VideoManager.class.php";
 $videoManager = new VideoManager;
 $videoManager->chargementVideos();
@@ -25,7 +25,7 @@ $videoManager->chargementVideos();
         <td class="align-middle"><?=$videos[$i]->getTitre()?>
         </td>
         <td class=" align-middle"><?=$videos[$i]->getDuree()?></td>
-        <td class="align-middle"><a href="<?=URL?>/videos/u<?=$videos[$i]->getId()?>"
+        <td class="align-middle"><a href="<?=URL?>/videos/u/<?=$videos[$i]->getId()?>"
                 class="btn btn-warning">Modifier</a></td>
         <td class=" align-middle"><a href="<?=URL?>/videos/d/<?=$videos[$i]->getId()?>"
                 class="btn btn-danger">Supprimer</a></td>

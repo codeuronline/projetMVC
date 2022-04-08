@@ -39,7 +39,7 @@ return $this->videos;
             }
         }
     }
-    
+                    
     public function ajoutVideoBd($data){
     extract($data);
     $sql ="INSERT INTO videos(titre,duree,photo) VALUES (:titre,:duree,:photo) ";
@@ -52,8 +52,8 @@ return $this->videos;
     $pdo->closeCursor;
     if ($resultat>0) {
     $data['id']=$this->getBdd()->lastInsertId();
-            // $video = new Video($data) ;
-            $this->ajoutVideo(new Video($data));
+            $video = new Video($data) ;
+            $this->ajoutVideo($video);
     }
     }
 
