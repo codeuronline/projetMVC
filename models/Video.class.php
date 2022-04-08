@@ -4,6 +4,7 @@ class Video{
     private $titre;
     private $duree;
     private $photo;
+    public static $videos;
     
     public function __construct($data){
         extract($data);
@@ -11,6 +12,7 @@ class Video{
         $this->titre = $titre;
         $this->duree = $duree;
         $this->photo= $photo;
+    //    self::$videos[]= $this;
     }
 
     public function getId() {  return $this->id; }
