@@ -26,7 +26,7 @@ class VideosController{
     
     public function afficherVideos(){
                 //$videos= $this->videoManager->getVideos();
-                 require "views/videos.php";
+                 require "views/videoTmp.view.php";
     }
     
     public function ajoutVideo(){

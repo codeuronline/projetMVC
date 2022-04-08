@@ -1,9 +1,11 @@
 <?php 
-class Video{
+class VideoTmp{
     private $id;
     private $titre;
     private $duree;
     private $photo;
+    
+    //public static $videosTmp;
     
     public function __construct($data){
         extract($data);
@@ -11,6 +13,7 @@ class Video{
         $this->titre = $titre;
         $this->duree = $duree;
         $this->photo= $photo;
+    //    self::$videosTmp[]= $this;
     }
 
     public function getId() {  return $this->id; }

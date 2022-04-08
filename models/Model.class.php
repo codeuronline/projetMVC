@@ -7,8 +7,6 @@ abstract class Model{
 // private static $pdo;
 public $pdo;
 
-
-
 // private static function setBdd(){
 public function setBdd(){
 self::$pdo = new PDO("mysql:host=localhost;dbname=videotheque;charset=utf8","root","");

@@ -1,10 +1,10 @@
 <?php
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
-require_once "controllers/VideosControllers.php";
+require_once "controllers/VideosControllersTmp.php";
 $videoController= new VideosController;
 try {
     var_dump($_SERVER['REQUEST_METHOD']);
-if (empty($_GET['slug'])) {
+    if (empty($_GET['slug'])) {
     require "views/accueil.view.php";
 } else {
         $url = explode("/", filter_var($_GET['slug']), FILTER_SANITIZE_URL);
