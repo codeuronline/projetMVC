@@ -44,16 +44,17 @@ class VideoManager  extends Model{
         extract($data);
         $sql ="INSERT INTO videos(titre,duree,photo) VALUES (:titre,:duree,:photo) "; 
         $pdo= $this->getBdd()->prepare($sql);
-        /*foreach ($data as $key => $value) {
+        foreach ($data as $key => $value) {
             $pdo->bindValue(":".$key, $value,PDO::PARAM_STR);    # code...
-        }*/
-        $pdo->bindValue(":titre", $titre,PDO::PARAM_STR);
-        $pdo->bindValue(":duree", $duree,PDO::PARAM_STR);
-        $pdo->bindValue(":photo", $photo,PDO::PARAM_STR);
+        }
+        // $pdo->bindValue(":titre", $titre,PDO::PARAM_STR);
+        // $pdo->bindValue(":duree", $duree,PDO::PARAM_STR);
+        // $pdo->bindValue(":photo", $photo,PDO::PARAM_STR);
         $resultat=$pdo->execute();
         $pdo->closeCursor;
         if ($resultat>0) {
-            $video = new Video($this->getBdd()->lastInsertId(),$titre,$duree,$photo);
+            $data['id']=$this->getBdd()->lastInsertId();
+            $video = new Video($data);
             $this->ajoutVideo($video);
         }
     }

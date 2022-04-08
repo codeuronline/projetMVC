@@ -1,6 +1,6 @@
 <?php
 
-require_once "models/VideoManager.class.php";
+require_once "models/VideoManagerTmp.class.php";
 
 class VideosController{
 
