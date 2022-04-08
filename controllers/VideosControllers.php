@@ -9,7 +9,6 @@ class VideosController{
     public function __contruct() {
         
         $this->videoManager= new VideoManager;
-        
         $this->videoManager->chargementVideos();
     }
     

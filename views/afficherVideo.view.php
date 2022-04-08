@@ -1,7 +1,9 @@
 <?php 
+require_once "models/Video.class.php";
 require_once  "models/VideoManager.class.php";
 $videoManager = new VideoManager;
 $videoManager->chargementVideos();
+$video= $videoManager->getVideoById($id);
 
 ob_start(); 
 ?>
