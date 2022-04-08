@@ -1,11 +1,11 @@
 <?php
 require_once "models/Video.class.php";
-$data = [
+/*$data = [
     ["id" => 1, "titre" => "AVENGERS 1", "duree" => "2h23min", "photo" => "avenger1.jfif"],
     ["id" => 2, "titre" => "AVENGERS 2 : l'Ere d'Ultron", "duree" => "2h21min", "photo" => "avenger2.jfif"],
     ["id" => 3, "titre" => "AVENGERS 3 : Infinity War", "duree" => "2h29min", "photo" => "avenger3.jpg"],
     ["id" => 4, "titre" => "AVENGERS 4 : ENDGAME", "duree" => "3h2min", "photo" => "avenger4.jfif"]
-];
+];*/
 require_once  "models\VideoManager.class.php";
 $videoManager = new VideoManager;
 /*for ($i=0; $i <count($data) ; $i++) { 
