@@ -15,12 +15,14 @@ class VideoManager extends Model{
     }
 
     public function chargementVideos(){
-        $req = $this->getBdd()->prepare("SELECT * FROM videos");
-        $req->execute();
-        $mesVideos = $req->fetchAll();
-        $req->closeCursor();
+        $pdo = $this->getBdd()->prepare("SELECT * FROM videos");
+        $pdo->execute();
+        $mesVideos = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        $pdo->closeCursor();
         foreach($mesVideos as $video){
-                    $this->ajoutVideo(new Video($video));
+                    $v= new Video($video['id'],$video['titre'],$video['duree'],$video['photo']);
+                    $this->ajoutVideo($v);
+                                          
         }
     }
     
@@ -32,20 +34,22 @@ class VideoManager extends Model{
         }
     }
                     
-    public function ajoutVideoBd($data){
+    public function ajoutVideoBd($titre,$duree,$photo){
         //extract($data);
         $sql = "INSERT INTO videos (titre,duree,photo) VALUES (:titre,:duree,:photo) ";
         $pdo= $this->getBdd()->prepare($sql);
-        foreach ($data as $key => $value) {
-            $pdo->bindValue(":" . $key, $value, PDO::PARAM_STR); # code...
-        }
+        //foreach ($data as $key => $value) {
+            $pdo->bindValue(":titre" . $titre, PDO::PARAM_STR); # code...
+            $pdo->bindValue(":duree" , $duree, PDO::PARAM_STR); # code...
+            $pdo->bindValue(":photo" . $photo, PDO::PARAM_STR); # code...
+        // }
         $resultat=$pdo->execute();
         $pdo->closeCursor;
         
         if ($resultat>0) {
             //on injecte l'id dans la liste des videos
-            $data['id'] = $this->getBdd()->lastInsertId();
-                $video = new Video($data) ;
+            $id = $this->getBdd()->lastInsertId();
+                $video = new Video($id,$titre,$duree,$photo) ;
                 $this->ajoutVideo($video);
         }
     }
@@ -67,16 +71,15 @@ class VideoManager extends Model{
         }
     }
     
-    public function modificationLivreBD($data){
-        extract($data);
+    public function modificationLivreBD($id,$titre,$duree,$photo){
         $req = "UPDATE Videos SET titre=:titre, duree=:duree, phto=:photo WHERE id=:id";
         $pdo = $this->getBdd()->prepare($req);
         $pdo->bindValue(":id",$id,PDO::PARAM_INT);
-        $stmt->bindValue(":titre",$titre,PDO::PARAM_STR);
-        $stmt->bindValue(":duree",$duree,PDO::PARAM_STR);
-        $stmt->bindValue(":photp",$photo,PDO::PARAM_STR);
-        $resultat = $stmt->execute();
-        $stmt->closeCursor();
+        $pdo->bindValue(":titre",$titre,PDO::PARAM_STR);
+        $pdo->bindValue(":duree",$duree,PDO::PARAM_STR);
+        $pdo->bindValue(":photp",$photo,PDO::PARAM_STR);
+        $resultat = $pdo->execute();
+        $pdo->closeCursor();
         if($resultat > 0){
             $this->getVideoById($id)->setTitre($titre);
             $this->getVideoById($id)->setDuree($duree);

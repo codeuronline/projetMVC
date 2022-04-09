@@ -44,14 +44,14 @@ class VideosController{
     }
     
     public function ajoutVideoValidation(){
-        $data=$_POST;
+        //$data=$_POST;
         $file = $_FILES['photo'];
         $repertoire= "public/images/";
-        $data['photo']=$this->ajoutImage($file,$repertoire);
-        // $nomImageAjoute=$this->ajoutImage($file,$repertoire);
-        echo "AVV";
-        var_dump($data); 
-        $this->videoManager->ajoutVideoBd($data);
+        //$data['photo']=$this->ajoutImage($file,$repertoire);
+        $nomImageAjoute=$this->ajoutImage($file,$repertoire);
+        //echo "AVV";
+        //var_dump($data); 
+        $this->videoManager->ajoutVideoBd($_POST['titre'],$_POST['duree'],$nomImageAjoute);
         
         header('Location: '.URL.'videos');
     
@@ -93,27 +93,25 @@ private function ajoutImage($file,$dir){
 
     }
 
-
-
     public function modificationVideo($id){
         $video = $this->videoManager->getVideoById($id);
         require "views/modifierVideo.view.php";
     }
 
     public function modificationVideoValidation(){
-        $data= $_POST;
-        $data['id']=$data['identifiant'];
-        $imageActuelle = $this->videoManager->getVideoById($_POST['identifiant'])->getImage();
+        //$data= $_POST;
+        //$data['id']=$data['identifiant'];
+        $imageActuelle = $this->videoManager->getVideoById($_POST['id'])->getImage();
         $file = $_FILES['photo'];
         if($file['size'] > 0){
             unlink("public/images/".$imageActuelle);
             $repertoire = "public/images/";
-            $data['photo'] = $this->ajoutImage($file,$repertoire);
+            $nouvellePhoto = $this->ajoutImage($file,$repertoire);
         } else {
-            $data['photo'] = $imageActuelle;
+            $nouvellePhoto = $imageActuelle;
         }
         extract($data);
-        $this->videoManager->modificationVideoBD($identifiant,$titre,$duree,$photo);
+        $this->videoManager->modificationVideoBD($_POST['$id'],$_POST['$titre'],$_POST['$duree'],$nouvellePhoto);
         header('Location: '. URL . "videos");
     }
 }

@@ -1,7 +1,7 @@
 <?php
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 require_once "controllers/VideosControllers.php";
-$videoController= new VideosController;
+$videosController= new VideosController;
 try {
     var_dump($_SERVER['REQUEST_METHOD']);
     if (empty($_GET['slug'])) {
@@ -14,25 +14,25 @@ try {
                 break;
             case 'videos':
                 if (empty($url[1])) {
-                    $videoController->afficherVideos();
+                    $videosController->afficherVideos();
                 } elseif ($url[1] === "s") {
-                    $videoController->afficherVideo($url[2]);
+                    $videosController->afficherVideo($url[2]);
                     echo "Affichage d'une video";
                 } elseif ($url[1] === "a") {
                     echo "Ajouter une video";
-                    $videoController->ajoutVideo();
+                    $videosController->ajoutVideo();
                 } elseif ($url[1] === "u") {
                     echo "Modification d'une video";
-                    $videoController->modificationVideo($url[2]);
+                    $videosController->modificationVideo($url[2]);
                 } elseif ($url[1] === 'd') {
                     echo "Suppression d'une video";
-                    $videoController->suppressionVideo($url[2]);
+                    $videosController->suppressionVideo($url[2]);
                 } elseif ($url[1] === 'av') {
                     echo "Valider l'enregistrement d'une video";
-                    $videoController->ajoutVideoValidation();
+                    $videosController->ajoutVideoValidation();
                 } elseif ($url[1] === 'uv') {
                     echo "Valider la modfication d'une video";
-                    $videoController->ajoutVideoValidation();
+                    $videosController->ajoutVideoValidation();
                 } else {
                     throw new Exception("La page n'existe pas");
                 }
