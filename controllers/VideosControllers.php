@@ -5,39 +5,55 @@ require_once "models/VideoManager.class.php";
 class VideosController{
 
     private $videoManager;
-       
+     
     public function __contruct() {
         
         $this->videoManager= new VideoManager;
         $this->videoManager->chargementVideos();
     }
     
-public function afficherVideo($id){
-    var_dump($id);
-    $video= $this->videoManager->getVideoById($id);
-    require "views/afficherVideo.view.php";    
-}
-
-public function afficherVideos(){
-            //$videos= $this->videoManager->getVideos();
-                require "views/video.view.php";
-}
-
-public function ajoutVideo(){
-    require "views/ajoutVideo.view.php";
-}
-
-public function ajoutVideoValidation(){
-    $data=$_POST;
-    $file = $_FILES['photo'];
-    $repertoire= "public/images/";
-    $data['photo']=$this->ajoutImage($file,$repertoire);
-    // $nomImageAjoute=$this->ajoutImage($file,$repertoire);
-    echo "AVV";
-    var_dump($data); 
-    $this->videoManager->ajoutVideoBd($data);
     
-    header('Location: '.URL.'videos');
+    public function afficherVideos(){
+        $videos= $this->videoManager->getVideos();
+        require "views/video.view.php";
+    }
+    public function afficherVideo($id){
+        var_dump($id);
+        $video= $this->videoManager->getVideoById($id);
+        require "views/afficherVideo.view.php";    
+    }
+
+    public function ajoutVideo(){
+        require "views/ajoutVideo.view.php";
+    }    
+
+
+
+    public function ajoutLivreValidation(){
+
+        $file = $_FILES['image'];
+
+        $repertoire = "public/images/";
+
+        $nomImageAjoute = $this->ajoutImage($file,$repertoire);
+
+        $this->livreManager->ajoutLivreBd($_POST['titre'],$_POST['nbPages'],$nomImageAjoute);
+
+        header('Location: '. URL . "livres");
+
+    }
+    
+    public function ajoutVideoValidation(){
+        $data=$_POST;
+        $file = $_FILES['photo'];
+        $repertoire= "public/images/";
+        $data['photo']=$this->ajoutImage($file,$repertoire);
+        // $nomImageAjoute=$this->ajoutImage($file,$repertoire);
+        echo "AVV";
+        var_dump($data); 
+        $this->videoManager->ajoutVideoBd($data);
+        
+        header('Location: '.URL.'videos');
     
 }
 
@@ -70,7 +86,36 @@ private function ajoutImage($file,$dir){
         throw new Exception("l'ajout de l'image n'a pas fonctionné");
     }else return ($date."_".$file['name']);
 }
+    public function suppressionVideo($id){
+        unlink("public/images/".$this->videoManager->getVideoById($id)->getPhoto());
+        $this->videoManager->suppressionVideoBD($id);
+        header('Location: '. URL . "videos");
+
+    }
 
 
-    
+
+    public function modificationVideo($id){
+        $video = $this->videoManager->getVideoById($id);
+        require "views/modifierVideo.view.php";
+    }
+
+    public function modificationVideoValidation(){
+        $data= $_POST;
+        $data['id']=$data['identifiant'];
+        $imageActuelle = $this->videoManager->getVideoById($_POST['identifiant'])->getImage();
+        $file = $_FILES['photo'];
+        if($file['size'] > 0){
+            unlink("public/images/".$imageActuelle);
+            $repertoire = "public/images/";
+            $data['photo'] = $this->ajoutImage($file,$repertoire);
+        } else {
+            $data['photo'] = $imageActuelle;
+        }
+        extract($data);
+        $this->videoManager->modificationVideoBD($identifiant,$titre,$duree,$photo);
+        header('Location: '. URL . "videos");
+    }
 }
+
+   

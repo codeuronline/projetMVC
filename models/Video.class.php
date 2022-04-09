@@ -4,7 +4,7 @@ class Video{
     private $titre;
     private $duree;
     private $photo;
-    public static $videos;
+    //public static $videos;
     
     public function __construct($data){
         extract($data);

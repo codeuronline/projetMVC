@@ -1,13 +1,13 @@
 <?php 
-require_once "models/Video.class.php";
+/*require_once "models/Video.class.php";
 require_once  "models/VideoManager.class.php";
 $videoManager = new VideoManager;
 $videoManager->chargementVideos();
-$video= $videoManager->getVideoById($id);
+$video= $videoManager->getVideoById($id);*/
 
 ob_start(); 
 ?>
-<table class="table text-center">
+<!--<table class="table text-center">
 
     <tr class="table-dark">
         <th>Image</th>
@@ -25,9 +25,9 @@ ob_start();
         <td class=" align-middle"><a href="" class="btn btn-danger">Supprimer</a></td>
     </tr>
 
-</table>
-<a href="<?=URL?>videos/a/" class="btn btn-success d-block">Ajouter</a>
-<!--<div class=" row">
+    </table>
+    <a href="<?=URL?>videos/a/" class="btn btn-success d-block">Ajouter</a>-->
+<div class=" row">
     <div class="col-6">
         <img src="<?=URL ?>public/images/<?=$video->getPhoto();?>" alt="" srcset="">
     </div>
@@ -40,7 +40,7 @@ ob_start();
             <?$video->getDuree();?>
         </p>
     </div>
-    </div>-->
+</div>
 <?php
 $content = ob_get_clean();
 $titre = $video->getTitre();

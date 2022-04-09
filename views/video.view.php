@@ -1,10 +1,10 @@
 <?php
+/*
 require_once "models/Video.class.php";
 require_once  "models/VideoManager.class.php";
 $videoManager = new VideoManager;
-$videoManager->chargementVideos();
-
-    ob_start();
+$videoManager->chargementVideos(); */
+  ob_start();
 ?>
 <table class="table text-center">
 
@@ -16,9 +16,8 @@ $videoManager->chargementVideos();
     </tr>
 
     <?php 
-        $videos = $videoManager->getVideos();
+        //$videos = $videoManager->getVideos();
         for ($i=0; $i < count($videos); $i++) :?>
-
     <tr>
         <td class="align-middle"><img src="public/images/<?=$videos[$i]->getPhoto()?>" alt="" width="60px" srcset="">
         </td>
@@ -27,8 +26,15 @@ $videoManager->chargementVideos();
         <td class=" align-middle"><?=$videos[$i]->getDuree()?></td>
         <td class="align-middle"><a href="<?=URL?>/videos/u/<?=$videos[$i]->getId()?>"
                 class="btn btn-warning">Modifier</a></td>
-        <td class=" align-middle"><a href="<?=URL?>/videos/d/<?=$videos[$i]->getId()?>"
-                class="btn btn-danger">Supprimer</a></td>
+        <td class=" align-middle">
+            <form method="POST" action="<?= URL ?>videos/d/<?= $videos[$i]->getId(); ?>"
+                onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
+
+                <button class="btn btn-danger" type="submit">Supprimer</button>
+
+            </form>
+            <!--<a href="<?=URL?>/videos/d/<?=$videos[$i]->getId()?>" class="btn btn-danger">Supprimer</a>-->
+        </td>
     </tr>
     <?php endfor ?>
 </table>
