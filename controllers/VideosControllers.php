@@ -91,7 +91,7 @@ private function ajoutImage($file,$dir){
         $file = $_FILES['photo'];
         if($file['size'] > 0){
             $repertoire = "public/images/";
-            unlink($repertoire.$imageActuelle);      
+            if (file_exists($repertoire.$imageActuelle)) unlink($repertoire.$imageActuelle);      
             $data['photo'] = $this->ajoutImage($file,$repertoire);
         } else {
             $data['photo'] = $imageActuelle;
