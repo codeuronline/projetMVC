@@ -32,9 +32,9 @@ try {
                 } elseif ($url[1] === 'av') {
                     echo "Valider l'enregistrement d'une video";
                     $videosController->ajoutVideoValidation();
-                } elseif ($url[1] === 'uv') {
-                    echo "Valider la modfication d'une video";
-                    $videosController->ajoutVideoValidation();
+                } elseif ($url[1] === 'mv') {
+                    echo "Valider la modification d'une video";
+                    $videosController->modificationVideoValidation();
                 } else {
                     throw new Exception("La page n'existe pas");
                 }

@@ -28,7 +28,7 @@ $videoManager->chargementVideos(); */
                 class="btn btn-warning">Modifier</a></td>
         <td class=" align-middle">
             <form method="POST" action="<?= URL ?>videos/d/<?= $videos[$i]->getId(); ?>"
-                onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
+                onSubmit="return confirm('Voulez-vous vraiment supprimer la video : <?=$videos[$i]->getTitre()?>');">
 
                 <button class="btn btn-danger" type="submit">Supprimer</button>
 

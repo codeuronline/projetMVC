@@ -17,17 +17,11 @@ class VideosController{
     
     public function afficherVideos(){
 
-error_log("Afficher videos");
-
-        //$this->videoManager= new VideoManager();
-
-        error_log(print_r($this->getVideoManager(), 1));
-        
         $videos= $this->getVideoManager()->getVideos();
-        require "views/video.view.php";
+       require "views/video.view.php";
     }
     public function afficherVideo($id){
-        var_dump($id);
+     
         $video= $this->videoManager->getVideoById($id);
         require "views/afficherVideo.view.php";    
     }
@@ -43,9 +37,8 @@ error_log("Afficher videos");
         //$data['photo']=$this->ajoutImage($file,$repertoire);
         $data['photo']=$this->ajoutImage($file,$repertoire);
         echo "AVV";
-        //var_dump($data); 
+        var_dump($data); 
         $this->videoManager->ajoutVideoBd($data);
-        
         header('Location: '.URL.'videos');
     
 }
@@ -58,6 +51,7 @@ private function ajoutImage($file,$dir){
         throw new Exception("Vous devez indiquer une photo");   
     }
     if (!file_exists($dir)) mkdir($dir,0777);
+    
     $extension = strtolower(pathinfo($file['name'],PATHINFO_EXTENSION));
     $date=date("ymdis");
     $targetfile= $dir.$date."_".$file["name"];
@@ -93,11 +87,11 @@ private function ajoutImage($file,$dir){
     public function modificationVideoValidation(){
         $data= $_POST;
         //$data['id']=$data['identifiant'];
-        $imageActuelle = $this->videoManager->getVideoById($_POST['id'])->getImage();
+        $imageActuelle = $this->videoManager->getVideoById($_POST['id'])->getPhoto();
         $file = $_FILES['photo'];
         if($file['size'] > 0){
-            unlink("public/images/".$imageActuelle);
             $repertoire = "public/images/";
+            unlink($repertoire.$imageActuelle);      
             $data['photo'] = $this->ajoutImage($file,$repertoire);
         } else {
             $data['photo'] = $imageActuelle;

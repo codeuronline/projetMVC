@@ -34,15 +34,12 @@ class VideoManager extends Model{
                     
     public function ajoutVideoBd($data){
         extract($data);
-        $sql = "INSERT INTO videos (titre,duree,photo) VALUES (:titre,:duree,:photo) ";
+        $sql = "INSERT INTO videos (id,titre,duree,photo) VALUES (NULL,:titre,:duree,:photo) ";
         $pdo= $this->getBdd()->prepare($sql);
         foreach ($data as $key => $value) {
-         if ($key!=='id') {
-            $pdo->bindValue(":$key" . $value, PDO::PARAM_STR);
+            $pdo->bindValue(":$key" , $value, PDO::PARAM_STR);
          }
-            
-        }
-         
+                
         $resultat=$pdo->execute();
         $pdo->closeCursor;
         
@@ -77,9 +74,9 @@ class VideoManager extends Model{
         $pdo = $this->getBdd()->prepare($sql);
         $pdo->bindValue(":id",$id,PDO::PARAM_INT);
         foreach ($data as $key => $value) {
-            if ($key !== 'id') {
-                $pdo->bindValue(":".$key,$value,PDO::PARAM_STR);
-            }
+            
+         $pdo->bindValue(":".$key,$value,PDO::PARAM_STR);
+            
         }
         $resultat = $pdo->execute();
         $pdo->closeCursor();
