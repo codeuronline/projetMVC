@@ -20,9 +20,7 @@ class VideoManager extends Model{
         $mesVideos = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $pdo->closeCursor();
         foreach($mesVideos as $video){
-                    $v= new Video($video['id'],$video['titre'],$video['duree'],$video['photo']);
-                    $this->ajoutVideo($v);
-                                          
+                    $this->ajoutVideo(new Video($video));                      
         }
     }
     
@@ -34,35 +32,37 @@ class VideoManager extends Model{
         }
     }
                     
-    public function ajoutVideoBd($titre,$duree,$photo){
-        //extract($data);
+    public function ajoutVideoBd($data){
+        extract($data);
         $sql = "INSERT INTO videos (titre,duree,photo) VALUES (:titre,:duree,:photo) ";
         $pdo= $this->getBdd()->prepare($sql);
-        //foreach ($data as $key => $value) {
-            $pdo->bindValue(":titre" . $titre, PDO::PARAM_STR); # code...
-            $pdo->bindValue(":duree" , $duree, PDO::PARAM_STR); # code...
-            $pdo->bindValue(":photo" . $photo, PDO::PARAM_STR); # code...
-        // }
+        foreach ($data as $key => $value) {
+         if ($key!=='id') {
+            $pdo->bindValue(":$key" . $value, PDO::PARAM_STR);
+         }
+            
+        }
+         
         $resultat=$pdo->execute();
         $pdo->closeCursor;
         
         if ($resultat>0) {
             //on injecte l'id dans la liste des videos
-            $id = $this->getBdd()->lastInsertId();
-                $video = new Video($id,$titre,$duree,$photo) ;
+            $data['id'] = $this->getBdd()->lastInsertId();
+                $video = new Video($data) ;
                 $this->ajoutVideo($video);
         }
     }
 
 
-    public function suppressionLivreBD($id)
+    public function suppressionVideoBd($id)
     {
 
-        $req = "DELETE FROM livres WHERE id=:idLivre";
+        $req = "DELETE FROM videos WHERE id=:id";
 
         $pdo = $this->getBdd()->prepare($req);
 
-        $pdo->bindValue(":idLivre", $id, PDO::PARAM_INT);
+        $pdo->bindValue(":id", $id, PDO::PARAM_INT);
         $resultat = $pdo->execute();
         $pdo->closeCursor();
         if ($resultat > 0) {
@@ -71,13 +71,16 @@ class VideoManager extends Model{
         }
     }
     
-    public function modificationLivreBD($id,$titre,$duree,$photo){
-        $req = "UPDATE Videos SET titre=:titre, duree=:duree, phto=:photo WHERE id=:id";
-        $pdo = $this->getBdd()->prepare($req);
+    public function modificationVideoBd($data){
+        extract($data);
+        $sql = "UPDATE Videos SET titre=:titre, duree=:duree, phto=:photo WHERE id=:id";
+        $pdo = $this->getBdd()->prepare($sql);
         $pdo->bindValue(":id",$id,PDO::PARAM_INT);
-        $pdo->bindValue(":titre",$titre,PDO::PARAM_STR);
-        $pdo->bindValue(":duree",$duree,PDO::PARAM_STR);
-        $pdo->bindValue(":photp",$photo,PDO::PARAM_STR);
+        foreach ($data as $key => $value) {
+            if ($key !== 'id') {
+                $pdo->bindValue(":".$key,$value,PDO::PARAM_STR);
+            }
+        }
         $resultat = $pdo->execute();
         $pdo->closeCursor();
         if($resultat > 0){
