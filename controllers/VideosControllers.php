@@ -37,14 +37,14 @@ error_log("Afficher videos");
     }    
     
     public function ajoutVideoValidation(){
-        //$data=$_POST;
+        $data=$_POST;
         $file = $_FILES['photo'];
         $repertoire= "public/images/";
         //$data['photo']=$this->ajoutImage($file,$repertoire);
-        $nomImageAjoute=$this->ajoutImage($file,$repertoire);
-        //echo "AVV";
+        $data['photo']=$this->ajoutImage($file,$repertoire);
+        echo "AVV";
         //var_dump($data); 
-        $this->videoManager->ajoutVideoBd($_POST['titre'],$_POST['duree'],$nomImageAjoute);
+        $this->videoManager->ajoutVideoBd($data);
         
         header('Location: '.URL.'videos');
     
