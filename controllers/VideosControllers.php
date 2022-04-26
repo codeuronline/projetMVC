@@ -120,6 +120,4 @@ private function ajoutImage($file,$dir){
 
         return $this;
     }
-}
-
-   
+}  
