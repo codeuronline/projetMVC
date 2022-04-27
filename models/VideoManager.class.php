@@ -7,6 +7,8 @@ class VideoManager extends Model{
     public $videos;
     
     public function ajoutVideo($video){
+        var_dump("ajout de Video à la liste Videos:");
+        var_dump($video);
         $this->videos[] = $video;
     }
     
@@ -15,12 +17,18 @@ class VideoManager extends Model{
     }
 
     public function chargementVideos(){
+        
         $pdo = $this->getBdd()->prepare("SELECT * FROM videos");
         $pdo->execute();
         $mesVideos = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $pdo->closeCursor();
-        foreach($mesVideos as $video){
-                    $this->ajoutVideo(new Video($video));                      
+         foreach($mesVideos as $video){
+            var_dump("chargement des données Video provenant de la BD : ");
+            var_dump($video);
+            $v= new Video($video);
+            var_dump("conversion en objet product avec les données data : ");
+            var_dump($v);
+                    $this->ajoutVideo($v);                      
         }
     }
     

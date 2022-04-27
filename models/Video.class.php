@@ -7,7 +7,10 @@ class Video{
     //public static $videos;
     
     public function __construct($data){
-        extract($data);
+        var_dump("dans l'objet video"); 
+        var_dump("donnees de la variable data transmise à l'objet video");
+         var_dump($data);
+         extract($data);
         $this->id = $id;
         $this->titre = $titre;
         $this->duree = $duree;
